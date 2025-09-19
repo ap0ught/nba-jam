@@ -1,0 +1,209 @@
+# NBA Jam - File Information Guide
+
+This document provides detailed information about the contents and purpose of each file section in the NBA Jam source code repository.
+
+## Core System Files
+
+### System Initialization and Control
+- **MAIN.ASM** - System initialization, interrupt handlers, main program entry point
+- **UTIL.ASM** - Utility subroutines and common functions
+- **PAL.ASM** - Palette allocator and fader control systems
+- **MPROC.ASM** - GSP multi-processing system management
+- **NDSP1.ASM** - GSP display processor control and management
+
+### Basketball Game Logic
+- **BB.ASM** - Primary basketball game program and core gameplay logic
+- **BB2.ASM** - Extended basketball game program functionality
+- **BB3.ASM** - Additional basketball game program features
+- **BB4.ASM** - Basketball game program supplements
+
+## Player System Files
+
+### Player Control and Movement
+- **PLYR.ASM** - Core player control, movement, and physics
+- **PLYR2.ASM** - Extended player behavior and mechanics
+- **PLYR3.ASM** - Additional player functionality and special moves
+
+### Player Attributes and Statistics
+- **PLYRAT.ASM** - Player ratings, attributes, and statistical data
+- **PLYRAT2.ASM** - Extended player attribute systems
+- **PLYRAT3.ASM** - Additional player rating functionality
+
+### Player Animation Sequences
+- **PLYRSEQ.ASM** - Player animation sequences and state management
+- **PLYRSEQ2.ASM** - Extended player animation sequences
+- **PLYRRSEQ.ASM** - Player running and movement sequences
+- **PLYRLSEQ.ASM** - Player layup and shooting sequences
+- **PLYRDSEQ.ASM** - Player dunk animation sequences
+- **PLYRDSQ2.ASM** - Extended dunk animation sequences
+- **PLYRSTND.ASM** - Player standing and idle animations
+
+## Game Mode and Interface Files
+
+### Team and Player Selection
+- **SELECT.ASM** - Team and player selection interface
+- **SELECT2.ASM** - Extended selection functionality
+- **SELECT3.ASM** - Additional selection screen features
+- **SELECT4.ASM** - Final selection system components
+
+### Create-A-Player System
+- **MAKEPLR.ASM** - Create-a-player logic and interface
+- **MAKEPLR2.ASM** - Extended create-a-player functionality
+
+### Attract Mode and Demonstrations
+- **ATTRACT.ASM** - Attract mode sequences and demo gameplay
+- **SCREEN.ASM** - Screen management and display control
+
+## Game Systems and Features
+
+### Scoring and Statistics
+- **SCORE.ASM** - Game scoring system and statistics tracking
+- **SCORE2.ASM** - Extended scoring functionality and displays
+
+### Audio and Speech
+- **SPEECH.ASM** - Announcer speech synthesis and sound effects
+- **SOUNDS.ASM** - Audio system management and sound control
+- **PATCH.ASM** - Audio patches and sound modifications
+
+### Game Text and Messaging
+- **TEXT.ASM** - Text display system and string management
+- **STRING.ASM** - String printing and text handling utilities
+
+## Background and Graphics Files
+
+### Background Graphics Systems
+- **BAKGND.ASM** - Background graphics handlers and management
+- **BGNDTBL.ASM** - Background graphics data tables
+- **BGNDPAL.ASM** - Background palette data
+- **BGNDPAL7.ASM** - Extended background palette set 7
+
+### Image and Sprite Data
+- **IMGTBL.ASM** - Image and sprite data tables
+- **IMGPAL.ASM** - Base image palette definitions
+- **IMGPAL1.ASM** through **IMGPAL8.ASM** - Individual palette sets 1-8
+- **IMGPALM.ASM** - Master image palette data
+- **IMGPALP.ASM** - Player-specific image palettes
+
+## AI and Automation
+
+### Computer Player Logic
+- **DRONE.ASM** - Computer-controlled player AI (drone logic)
+- **DRONE2.ASM** - Extended AI functionality
+- **DRONE2O.ASM** - Alternative drone AI implementation
+- **DRN.ASM** - Core drone behavior systems
+- **DRN2.ASM** - Extended drone behavior
+- **DRN331.ASM** - Specific drone AI variant
+
+## Arcade System Management
+
+### Coin-Op and Business Logic
+- **AUDIT.ASM** - Game auditing and accounting systems
+- **RECORD.ASM** - Game records and CMOS data management
+- **HSTD.ASM** - High score management and record keeping
+
+### Test and Diagnostic Systems
+- **TEST.ASM** - Diagnostic test program
+- **DIAG.ASM** - System diagnostics and hardware testing
+- **MENU.ASM** - Test menu system and navigation
+- **ADJUST.ASM** - Game adjustment and configuration interface
+
+## Special Features
+
+### Advanced Graphics Features
+- **UNZIP.ASM** - Video decompression and playback system (for trophy sequences)
+- **DUNK.ASM** - Special dunk move graphics and effects
+
+### Miscellaneous Systems
+- **FOO.ASM**, **FOO1.ASM**, **FOO3.ASM** - Development test files
+- **TODO.ASM** - Development notes and incomplete features
+
+## Build and Configuration Files
+
+### Linker and Build Configuration
+- **BB.CMD** - Main linker command file defining memory layout
+- **BB.TVS** - Television/display configuration settings
+- **MAKEFILE** - Build system configuration and dependencies
+
+### Include Files and Constants
+- **AUDIT.EQU** - Audit system constants and definitions
+- **BBSEC.EQU** - Basketball game section definitions
+- **DIPEQU.ASM** - DIP switch and configuration constants
+- **DIPSW.EQU** - DIP switch settings and options
+- **DISP.EQU** - Display system constants
+- **GAME.EQU** - Game-specific constants and definitions
+- **GSP.EQU** - Graphics System Processor definitions
+- **LINK.EQU** - Linker and memory layout constants
+- **MENU.EQU** - Menu system constants
+- **MPROC.EQU** - Multi-processing system definitions
+- **PLYR.EQU** - Player system constants and structures
+- **SYS.EQU** - System-level constants and definitions
+- **WORLD.EQU** - Game world and coordinate system definitions
+
+### Header Files
+- **MACROS.HDR** - Assembly macro definitions
+- **SHAWN.HDR** - Developer-specific macro definitions
+
+## Build and Utility Scripts
+
+### Primary Build Scripts
+- **BBL.BAT** - Main build script for creating the game executable
+- **BBC.BAT** - Clean build script
+- **BBM.BAT** - Minimal build script
+- **C.BAT** - Compile individual modules
+
+### ROM and Distribution
+- **MAKEROMS.BAT** - ROM image creation script
+- **MAKEVDA.BAT** - VDA (Video Display Array) creation
+- **JOINROM.BAT** - ROM joining and final assembly
+
+### Development Utilities
+- **GREPA.BAT** / **GREPE.BAT** - Source code grep utilities
+- **CHECKA.BAT** / **CHECKE.BAT** - Code verification scripts
+- **CLEANA.BAT** / **CLEANE.BAT** - Build cleanup utilities
+- **BKUP.BAT** - Backup utility script
+- **KILLNET.BAT** - Network cleanup utility
+
+### Platform-Specific Scripts
+- **PIF_BLIM.BAT** - Platform Interface File for BLIM configuration
+- **PIF_DOS.BAT** - DOS platform interface configuration
+- **PIF_TV.BAT** - Television display platform interface
+- **PIF_WIMP.BAT** - Windows platform interface
+
+### Legacy and Utilities
+- **ER.BAT** - Error handling script
+- **F.BAT** - File utility script
+- **L.BAT** - List utility script
+- **RUN.BAT** - Game execution script
+
+## Image and Asset Directories
+
+### IMG Directory
+Contains binary image files (.IMG format) for:
+- Player sprites and animations
+- Court graphics and backgrounds
+- UI elements and text graphics
+- Special effect images
+- Logo and branding graphics
+
+### OLD Directory
+Contains legacy versions of source files and build configurations from earlier development phases.
+
+## Documentation Files
+
+### Development Documentation
+- **HEY.DOC** / **HEY3.DOC** - Developer notes and communications
+- **QUEST.DOC** - Trivia questions and game content
+- **RAPLYRIC.DOC** - Rapper lyrics and audio content notes
+- **TODO.DOC** - Outstanding development tasks and bug fixes
+
+## File Naming Conventions
+
+- **.ASM** - Assembly source code files
+- **.EQU** - Constant and definition files
+- **.HDR** - Header files with macro definitions
+- **.BAT** - DOS batch script files
+- **.CMD** - Linker command files
+- **.DOC** - Documentation and notes
+- **.IMG** - Binary image/graphics data
+
+This file structure represents a complete arcade game development environment from the early 1990s, showcasing the modular design and comprehensive toolchain used to create NBA Jam.

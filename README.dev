@@ -1,0 +1,142 @@
+# NBA Jam - Development Guide
+
+This document provides information for developers working with the NBA Jam source code, including build instructions, development tasks, and technical details.
+
+## Development Environment
+
+The original development environment was based on:
+- **Texas Instruments TMS34010 development tools**
+- **DOS/Windows-based build system**
+- **GSP (Graphics System Processor) assembler and linker**
+- **Williams Electronics custom development hardware**
+
+## Build System
+
+### Primary Build Commands
+
+The project uses a batch file-based build system:
+
+```bash
+# Primary build script
+BBL.BAT         # Main build script for creating BB.OUT executable
+
+# Alternative build configurations
+BBC.BAT         # Clean build
+BBM.BAT         # Minimal build  
+C.BAT           # Compile specific modules
+```
+
+### Build Process
+
+1. **Assembly** - Source `.ASM` files are assembled into `.OBJ` object files
+2. **Linking** - Object files are linked using `BB.CMD` linker script
+3. **Output** - Creates `BB.OUT` executable and `BB.MAP` memory map
+
+### Linker Configuration
+
+The `BB.CMD` file defines:
+- Memory layout for the GSP system
+- Object file inclusion order
+- Entry point (`init_prog`)
+- Memory sections (ROM, RAM, vectors)
+
+### Build Dependencies
+
+The `MAKEFILE` shows module dependencies:
+- Most modules depend on `.EQU` include files
+- Image modules require `.TBL` data tables
+- Core modules have cross-dependencies
+
+## Development Tasks (TODO)
+
+Based on `TODO.DOC`, outstanding development tasks include:
+
+### High Priority
+- [ ] More heads in create player
+- [ ] Fix angle 1&5 alleyoops (jump from out-of-bounds)
+- [ ] Don't push player if failing or falling down
+- [ ] Team starring page
+- [ ] Halftime team swap
+
+### Audio/Visual Issues
+- [ ] Sound system volume reset problem
+- [ ] Attract mode/sound volume adjustment
+- [ ] Score plate clock digits glitch at halftime fade
+- [ ] Fix white pixels on stat screen fade down
+- [ ] Fix "softly off of glass" speech on pure swish
+
+### Game Features
+- [ ] Fix favored by points on vs. screen
+- [ ] Implement grand champion functionality
+- [ ] Add secret players and adjust their stats
+
+## File Organization
+
+### Core Systems
+- **Initialization**: `MAIN.ASM` - System startup and interrupts
+- **Game Logic**: `BB*.ASM` series - Core basketball gameplay
+- **Player System**: `PLYR*.ASM` - Player movement and behavior
+- **Graphics**: `NDSP1.ASM`, `MPROC.ASM` - Display processor management
+
+### Game Features
+- **Attract Mode**: `ATTRACT.ASM` - Demo sequences
+- **Player Selection**: `SELECT*.ASM` - Team/player selection
+- **Create Player**: `MAKEPLR*.ASM` - Custom player creation
+- **Scoring**: `SCORE*.ASM` - Game statistics and display
+
+### Data and Assets
+- **Graphics**: `IMGPAL*.ASM` - Sprite palettes and image data
+- **Audio**: `SPEECH.ASM`, `SOUNDS.ASM` - Audio system
+- **Player Data**: `PLYRAT*.ASM` - Player statistics and attributes
+
+## Testing and Debugging
+
+### Test Modes
+- **TEST.ASM** - Diagnostic test program
+- **DIAG.ASM** - System diagnostics
+- **MENU.ASM** - Test menu system
+- **ADJUST.ASM** - Game adjustments and settings
+
+### Utility Scripts
+- **GREPA.BAT** / **GREPE.BAT** - Source code search utilities
+- **CHECKA.BAT** / **CHECKE.BAT** - Code verification
+- **CLEANA.BAT** / **CLEANE.BAT** - Build cleanup
+
+## Memory Layout
+
+The system uses several memory regions defined in `BB.CMD`:
+- **SCRATCH**: Working RAM (0x01000000, 0x3f7300 bytes)
+- **ROM**: Program code (0xFF800000, 0x7F6F00 bytes)  
+- **IROM**: Image data (0x02000000, 0x400000 bytes)
+- **VECTORS**: Interrupt vectors (0xFFFFFC00, 0x400 bytes)
+
+## Development Notes
+
+### Code Style
+- Assembly code uses TMS34010 instruction set
+- Extensive use of macros defined in `MACROS.HDR`
+- Include files (`.EQU`) define constants and structures
+- Comments indicate ownership and modification history
+
+### Platform Specific
+- Code targets Williams arcade hardware
+- GSP (Graphics System Processor) handles display
+- Custom sound hardware for speech and effects
+- Coin-op specific features (audits, adjustments)
+
+### Build Optimization
+- Modular design allows selective rebuilding
+- Object files can be excluded with comments in `BB.CMD`
+- Multiple build configurations for different features
+
+## Modern Development Considerations
+
+When working with this historical codebase:
+
+1. **Preserve original formatting** and comment styles
+2. **Understand the target hardware** limitations and capabilities
+3. **Test changes carefully** - arcade hardware is unforgiving
+4. **Document modifications** following the existing pattern
+5. **Respect the original architecture** and design decisions
+
+This codebase represents the state of the art for early 1990s arcade development and should be treated as both functional code and historical artifact.
