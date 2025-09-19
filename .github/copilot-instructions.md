@@ -13,7 +13,7 @@ NBA JAM is a classic 1990s arcade basketball game developed by Midway/Williams E
   - `load2` (Image loading utility)
   - DOS/Windows 95-era development environment
 - **DO NOT attempt to build or run this code** - it will fail due to missing specialized assemblers and tools.
-- **NEVER CANCEL**: Any build attempts will fail quickly, but search and analysis operations should complete normally.
+- **Do not cancel search or analysis operations**: Any build attempts will fail quickly, but search and analysis operations should complete normally.
 
 ### Platform Architecture
 - **Processor**: TMS34010 Graphics System Processor (GSP)
