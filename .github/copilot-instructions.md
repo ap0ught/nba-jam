@@ -214,7 +214,7 @@ SUBRP	process_name
 Examples from NDSP1.ASM:
 ```assembly
 SUBR	dma_irq
-	move	-*b14,-*b12,L		; Save registers
+	move	-*b14,-*b12,L		; Move long from [--b14] to [--b12]
 	; interrupt handler code
 	rets
 
