@@ -47,6 +47,277 @@ The original build process used these steps:
 
 **These tools are not available in modern environments - DO NOT attempt to run them.**
 
+## TMS34010 Assembly Syntax Guide
+
+### Assembly File Structure
+Every assembly file follows this standard structure:
+```assembly
+**************************************************************************
+* File comment header with version and copyright info
+**************************************************************************
+	.file	"filename.asm"
+	.title	"Module Description"
+	.width	132
+	.option	b,d,l,t
+	.mnolist
+
+	.include	gsp.equ       ; Hardware register definitions
+	.include	sys.equ       ; System constants
+	.include	macros.hdr    ; Macro definitions
+
+; External references
+	.ref	external_function
+	.ref	external_data
+
+; Constants and equates
+CONSTANT_NAME	.equ	123
+
+; Code sections
+SUBR	function_name
+	; function body
+	rets
+
+	.end
+```
+
+### Common Assembly Directives
+
+#### File Header Directives
+- `.file "name.asm"` - Specifies source filename for debugging
+- `.title "description"` - Sets module title for listings  
+- `.width 132` - Sets listing line width to 132 characters
+- `.option b,d,l,t` - Assembler options (binary, decimal, list, title)
+- `.mnolist` - Suppress macro expansion in listings
+
+#### Include and Reference Directives  
+- `.include filename` - Include another source file
+- `.ref symbol` - Reference external symbol
+- `.def symbol` - Define global symbol for export
+- `.global symbol` - Make symbol globally visible
+
+#### Conditional Assembly
+```assembly
+	.if	DEBUG
+	; Debug-only code
+	.ref	SLDEBUG
+	.endif
+```
+
+### TMS34010 Instructions
+
+#### Data Movement
+```assembly
+	move	src,dst,size		; Move data between registers/memory
+	movi	#immediate,reg		; Move immediate value to register
+	movk	#constant,reg		; Move small constant (1-32) to register
+```
+
+Examples from the codebase:
+```assembly
+	move	*a0(ODATA_p),a1,L	; Load long word from memory
+	movi	>1000100,b5		; Load immediate hex value  
+	movk	1,a14			; Load constant 1
+	move	b9,b12			; Copy register to register
+```
+
+#### Arithmetic and Logic
+```assembly
+	add	src,dst			; Addition
+	sub	src,dst			; Subtraction
+	and	src,dst			; Bitwise AND
+	or	src,dst			; Bitwise OR
+	xor	src,dst			; Bitwise XOR
+```
+
+#### Control Flow
+```assembly
+	calla	subroutine		; Call subroutine (saves return address)
+	callr	relative_addr		; Call relative address
+	rets				; Return from subroutine
+	jmp	address			; Unconditional jump
+	jrz	label			; Jump if zero
+	jrnz	label			; Jump if not zero
+```
+
+#### Graphics-Specific Instructions
+```assembly
+	setf	field,1,0		; Set graphics field register
+	pixblt	B,L			; Pixel block transfer
+```
+
+Example from NDSP1.ASM:
+```assembly
+	setf	1,0,0			; Disable DMA interrupt
+	move	sp,@INTENB+1		; Clear X1E interrupt enable
+	setf	16,1,0			; Set 16-bit mode
+```
+
+### Register Usage Conventions
+
+#### A-File Registers (Address/General Purpose)
+- `a0-a14` - General purpose address registers
+- `a13` - Frame pointer (fp)
+- `a14` - Parameter stack pointer (pstk)
+- `sp` - System stack pointer
+
+#### B-File Registers (Graphics Operations)
+- `b0` - SADDR (source address)
+- `b1` - SPTCH (source pitch)  
+- `b2` - DADDR (destination address)
+- `b3` - DPTCH (destination pitch)
+- `b4` - OFFSET
+- `b5` - WSTART (window start)
+- `b6` - WEND (window end)
+- `b7` - DYDX (delta Y/delta X)
+- `b8` - COLOR0
+- `b9` - COLOR1
+- `b10` - COUNT
+- `b11` - INC1
+- `b12` - INC2
+- `b13` - PATTRN (pattern)
+
+### Data Declarations
+
+#### Basic Data Types
+```assembly
+	.byte	value		; 8-bit byte
+	.word	value		; 16-bit word  
+	.long	value		; 32-bit long word
+	.even			; Align to even address
+	.bss	symbol,size	; Reserve uninitialized space
+```
+
+Examples from the codebase:
+```assembly
+	.word	>F9F7,>50,>814A,0	; Sound data structure
+	.long	sequence_address	; Pointer to animation sequence
+	.byte	"Text string",0		; Null-terminated string
+	.even				; Ensure word alignment
+```
+
+### Subroutine Definitions
+
+#### SUBR Macro (Basic Subroutine)
+```assembly
+SUBR	function_name
+	; function body
+	rets
+```
+
+#### SUBRP Macro (Process Subroutine)  
+```assembly
+SUBRP	process_name
+	; process body that may yield control
+	rets
+```
+
+Examples from NDSP1.ASM:
+```assembly
+SUBR	dma_irq
+	move	-*b14,-*b12,L		; Save registers
+	; interrupt handler code
+	rets
+
+SUBR	char_gen  
+	move	*a0(ODATA_p),a1,L	; Get player name pointer
+	move	b7,a7			; SCALEY:SCALEX
+	; character generation code
+	rets
+```
+
+### Animation and Game Macros
+
+#### Animation Timing Macros
+```assembly
+WLW	time,frame,flags	; Wait-Long-Word: timing, image, flags
+WL	time,function		; Wait-Long: timing, function call
+WLLW	time,func,param,value	; Wait-Long-Long-Word: complex timing
+W0				; End marker (wait 0)
+```
+
+Examples from DUNK.ASM:
+```assembly
+	WLW	4,M1SPDU1,F		; Display frame M1SPDU1 for 4 ticks
+	WLW	-1,seq_jam_speech,JAM_EASY  ; Call speech function
+	WL	-1,seq_call_name	; Call name announcement  
+	WLW	260,M1SPDU8,F		; Wait 260 ticks (landing delay)
+	W0				; End sequence
+```
+
+#### Stack Operations
+```assembly
+PUSH	reg1,reg2,reg3		; Push registers onto stack
+PULL	reg1,reg2,reg3		; Pull registers from stack
+```
+
+#### Data Structure Macros
+```assembly
+LWW	long_val,word1,word2	; Long-Word-Word structure
+LWWWWWW	long_val,w1,w2,w3,w4,w5,w6  ; Complex data structure
+```
+
+### Memory Addressing
+
+#### Addressing Modes
+```assembly
+	move	*a0,a1		; Indirect addressing
+	move	*a0+,a1		; Post-increment
+	move	*a0-,a1		; Post-decrement  
+	move	-*a0,a1		; Pre-decrement
+	move	*a0(offset),a1	; Indexed addressing
+	move	@address,a1	; Absolute addressing
+```
+
+#### Memory Organization
+- `@INTENB` - Interrupt enable register
+- `@CONTROL` - Graphics control register
+- Graphics memory uses special GSP addressing
+- Object data structures use offset notation: `*a0(ODATA_p)`
+
+### Comments and Labels
+
+#### Comment Styles
+```assembly
+; Single line comment
+* Alternative comment style (legacy)
+
+;--------------------  
+; Section divider
+;--------------------
+
+********************************
+* Major section header  
+********************************
+```
+
+#### Label Definitions
+```assembly
+function_name:		; Global label
+#local_label		; Local label (scope limited)
+lp?			; Loop label with auto-generation
+```
+
+### Conditional Compilation
+
+#### Debug Code
+```assembly
+	.if	DEBUG
+	.ref	SLDEBUG
+	calla	debug_function
+	.endif
+```
+
+#### Platform-Specific Code
+```assembly
+	.if	NBA_VERSION
+	; NBA JAM specific code
+	.else  
+	; Other version code
+	.endif
+```
+
+This syntax guide covers the essential TMS34010 assembly patterns used throughout the NBA JAM codebase. The examples are taken directly from the source files to ensure accuracy and practical relevance.
+
 ## Navigation and Code Analysis
 
 ### Key Areas to Focus On
