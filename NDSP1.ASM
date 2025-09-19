@@ -1289,7 +1289,7 @@ D3XPTS	.equ	>140		;UHL *Xformed points array (Cnt, XYZ,XYZ..)
 
 
 	setf	1,0,0			;>Disable DMA interrupt
-	move	sp,@INTENB+1		;Clr X1E
+	move	sp,@INTENB+1		;Set X1E interrupt enable register to SP value
 	setf	16,1,0
 
 	movi	[1,1],b13		;B13=Const 1:1
