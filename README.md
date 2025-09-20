@@ -33,11 +33,11 @@ The source code is organized into several key components:
 - **PLYRAT*.ASM** - Player attributes and statistics
 
 ### Game Systems
-- **ATTRACT.ASM** - Attract mode sequences
+- **ATTRACT.ASM** - Attract mode sequences and demo gameplay
 - **SELECT*.ASM** - Team and player selection screens
 - **MAKEPLR*.ASM** - Create-a-player functionality
 - **SCORE*.ASM** - Scoring and statistics tracking
-- **AUDIT.ASM** - Game auditing and coin-op management
+- **AUDIT.ASM** - Game auditing and coin-op accounting systems
 
 ### Graphics and Audio
 - **IMGPAL*.ASM** - Image palettes and color data
@@ -46,8 +46,8 @@ The source code is organized into several key components:
 - **SOUNDS.ASM** - Audio system management
 
 ### Build System
-- **MAKEFILE** - Build configuration
-- **BB.CMD** - Linker command file
+- **MAKEFILE** - Build system configuration and dependencies
+- **BB.CMD** - Main linker command file defining memory layout
 - **BBL.BAT** - Primary build script
 - Various **\*.BAT** files for different build configurations
 

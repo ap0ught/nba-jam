@@ -97,7 +97,7 @@ This document provides detailed information about the contents and purpose of ea
 ## Arcade System Management
 
 ### Coin-Op and Business Logic
-- **AUDIT.ASM** - Game auditing and accounting systems
+- **AUDIT.ASM** - Game auditing and coin-op accounting systems
 - **RECORD.ASM** - Game records and CMOS data management
 - **HSTD.ASM** - High score management and record keeping
 
@@ -105,7 +105,7 @@ This document provides detailed information about the contents and purpose of ea
 - **TEST.ASM** - Diagnostic test program
 - **DIAG.ASM** - System diagnostics and hardware testing
 - **MENU.ASM** - Test menu system and navigation
-- **ADJUST.ASM** - Game adjustment and configuration interface
+- **ADJUST.ASM** - Game adjustments and configuration interface
 
 ## Special Features
 
@@ -123,6 +123,10 @@ This document provides detailed information about the contents and purpose of ea
 - **BB.CMD** - Main linker command file defining memory layout
 - **BB.TVS** - Television/display configuration settings
 - **MAKEFILE** - Build system configuration and dependencies
+
+### Build Artifacts
+- **BB.OUT** - Main executable output file (linked binary)
+- **BB.MAP** - Memory map file showing symbol locations and memory usage
 
 ### Include Files and Constants
 - **AUDIT.EQU** - Audit system constants and definitions

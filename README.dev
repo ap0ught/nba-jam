@@ -32,13 +32,30 @@ C.BAT           # Compile specific modules
 2. **Linking** - Object files are linked using `BB.CMD` linker script
 3. **Output** - Creates `BB.OUT` executable and `BB.MAP` memory map
 
-### Linker Configuration
+### Build Configuration
+
+The build system uses multiple configuration approaches:
+
+#### Makefile System
+- **MAKEFILE** - Build system configuration and dependencies
+- Shows module dependencies and include file relationships
+- Most modules depend on `.EQU` include files
+- Image modules require `.TBL` data tables
+- Core modules have cross-dependencies
+
+#### Linker Configuration
 
 The `BB.CMD` file defines:
 - Memory layout for the GSP system
 - Object file inclusion order
 - Entry point (`init_prog`)
 - Memory sections (ROM, RAM, vectors)
+
+#### Build Artifacts
+
+The build process generates:
+- **BB.OUT** - Main executable output file (linked binary)
+- **BB.MAP** - Memory map file showing symbol locations and memory usage
 
 ### Build Dependencies
 
@@ -79,7 +96,7 @@ Based on `TODO.DOC`, outstanding development tasks include:
 - **Graphics**: `NDSP1.ASM`, `MPROC.ASM` - Display processor management
 
 ### Game Features
-- **Attract Mode**: `ATTRACT.ASM` - Demo sequences
+- **Attract Mode**: `ATTRACT.ASM` - Attract mode sequences and demo gameplay
 - **Player Selection**: `SELECT*.ASM` - Team/player selection
 - **Create Player**: `MAKEPLR*.ASM` - Custom player creation
 - **Scoring**: `SCORE*.ASM` - Game statistics and display
@@ -93,9 +110,9 @@ Based on `TODO.DOC`, outstanding development tasks include:
 
 ### Test Modes
 - **TEST.ASM** - Diagnostic test program
-- **DIAG.ASM** - System diagnostics
+- **DIAG.ASM** - System diagnostics and hardware testing
 - **MENU.ASM** - Test menu system
-- **ADJUST.ASM** - Game adjustments and settings
+- **ADJUST.ASM** - Game adjustments and configuration interface
 
 ### Utility Scripts
 - **GREPA.BAT** / **GREPE.BAT** - Source code search utilities
