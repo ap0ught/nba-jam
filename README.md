@@ -51,6 +51,7 @@ The source code is organized into several key components:
 - **BBL.BAT** - Primary build script
 - Various **\*.BAT** files for different build configurations
 
+> **Caution:** Building this codebase requires vintage tools (such as the original TMS34010 assembler and DOS-based build scripts) and is not supported on modern environments. Modern compilers and operating systems are incompatible with the original toolchain. This repository is provided for historical and educational purposes.
 ## Historical Significance
 
 NBA Jam was groundbreaking for several reasons:
