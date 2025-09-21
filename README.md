@@ -33,11 +33,11 @@ The source code is organized into several key components:
 - **PLYRAT*.ASM** - Player attributes and statistics
 
 ### Game Systems
-- **ATTRACT.ASM** - Attract mode sequences
+- **ATTRACT.ASM** - Attract mode sequences and demo gameplay
 - **SELECT*.ASM** - Team and player selection screens
 - **MAKEPLR*.ASM** - Create-a-player functionality
 - **SCORE*.ASM** - Scoring and statistics tracking
-- **AUDIT.ASM** - Game auditing and coin-op management
+- **AUDIT.ASM** - Game auditing and coin-op accounting systems
 
 ### Graphics and Audio
 - **IMGPAL*.ASM** - Image palettes and color data
@@ -46,11 +46,12 @@ The source code is organized into several key components:
 - **SOUNDS.ASM** - Audio system management
 
 ### Build System
-- **MAKEFILE** - Build configuration
-- **BB.CMD** - Linker command file
+- **MAKEFILE** - Build system configuration and dependencies
+- **BB.CMD** - Main linker command file defining memory layout
 - **BBL.BAT** - Primary build script
 - Various **\*.BAT** files for different build configurations
 
+> **Caution:** Building this codebase requires vintage tools (such as the original TMS34010 assembler and DOS-based build scripts) and is not supported on modern environments. Modern compilers and operating systems are incompatible with the original toolchain. This repository is provided for historical and educational purposes.
 ## Historical Significance
 
 NBA Jam was groundbreaking for several reasons:
