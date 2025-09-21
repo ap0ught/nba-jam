@@ -46,7 +46,7 @@ The build system uses multiple configuration approaches:
 #### Linker Configuration
 
 The `BB.CMD` file defines:
-- Memory layout for the GSP system
+- Memory layout for the Graphics System Processor (GSP) system
 - Object file inclusion order
 - Entry point (`init_prog`)
 - Memory sections (ROM, RAM, vectors)
