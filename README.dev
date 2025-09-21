@@ -36,7 +36,7 @@ C.BAT           # Compile specific modules
 
 The build system uses multiple configuration approaches:
 
-#### Makefile System
+#### MAKEFILE system
 - **MAKEFILE** - Build system configuration and dependencies
 - Shows module dependencies and include file relationships
 - Most modules depend on `.EQU` include files
